@@ -1,0 +1,6 @@
+{
+  "Host": "127.0.0.1",
+  "TcpPort": 7778,
+  "Name": "Suber v0.4 demo",
+  "MaxConn": 3
+}

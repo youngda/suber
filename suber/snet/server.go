@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"suber/siface"
+	"suber/utils"
 )
 
 type Server struct {
@@ -33,7 +34,12 @@ func CallBackClient(conn *net.TCPConn,data []byte,cnt int)error{
 
 //启动服务器
 func (s *Server) Start(){
-	fmt.Printf("[Start] Server Listenner at IP: %s,Port %d, is starting\n",s.IP,s.Port)
+	fmt.Printf("[Suber] Server Name: %s, listenner at IP: %s,Port：%d\n",
+		utils.GlobalConfigNow.Name,utils.GlobalConfigNow.Host,utils.GlobalConfigNow.TcpPort)
+	fmt.Printf("[Suber] Version:%s, MaxConn:%d, MaxPacketSize:%d\n",
+		utils.GlobalConfigNow.Version,utils.GlobalConfigNow.MaxConn,utils.GlobalConfigNow.MaxPackageSize)
+
+
 	go func() {
 
 		//1. 获取TCP ADD
@@ -91,10 +97,10 @@ func (s *Server)AddRouter(router siface.IRouter)  {
 
 func NewServer(name string) siface.IServer{
 	s:=&Server{
-		Name:name,
+		Name:utils.GlobalConfigNow.Name,
 		IPVersion:"tcp4",
-		IP:"0.0.0.0",
-		Port:8999,
+		IP:utils.GlobalConfigNow.Host,
+		Port:utils.GlobalConfigNow.TcpPort,
 		Router:nil,
 	}
 	return s
