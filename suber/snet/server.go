@@ -2,7 +2,6 @@ package snet
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
 	"net"
 	"suber/siface"
 )
@@ -16,9 +15,11 @@ type Server struct {
 	IP string
 	//服务器监听端口
 	Port int
+	//当前的server添加一个router,server的注册的链接对应的处理业务
+	Router siface.IRouter
 }
 
-
+/*
 func CallBackClient(conn *net.TCPConn,data []byte,cnt int)error{
 	fmt.Println("[Conn Handle] CallbackToClient...")
 	if _,err := conn.Write(data[:cnt]);err != nil{
@@ -27,6 +28,9 @@ func CallBackClient(conn *net.TCPConn,data []byte,cnt int)error{
 	}
 	return nil
 }
+*/
+
+
 //启动服务器
 func (s *Server) Start(){
 	fmt.Printf("[Start] Server Listenner at IP: %s,Port %d, is starting\n",s.IP,s.Port)
@@ -55,7 +59,7 @@ func (s *Server) Start(){
 				continue
 			}
 			//将处理新连接的业务方法和conn进行绑定，得到我们的链接模块
-			dealConn:=NewConnection(conn,cid,CallBackClient)
+			dealConn:=NewConnection(conn,cid,s.Router)
 			cid++
 
 			//启动当前链接的业务处理
@@ -77,7 +81,10 @@ func (s *Server)Serve()  {
 
 	}
 }
-
+func (s *Server)AddRouter(router siface.IRouter)  {
+	s.Router = router
+	fmt.Println("add router success...")
+}
 /*
 	初始化server模块方法
 */
@@ -88,6 +95,7 @@ func NewServer(name string) siface.IServer{
 		IPVersion:"tcp4",
 		IP:"0.0.0.0",
 		Port:8999,
+		Router:nil,
 	}
 	return s
 }

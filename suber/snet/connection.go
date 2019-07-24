@@ -18,21 +18,23 @@ type Connection struct {
 
 	//当前链接状态
 	IsCLose bool
-	// 当前链接所绑定的处理业务的访问API
-	handleAPI siface.HandleFunc
 
 	//告知当前链接已经退出的/停止channel
 	ExitChan chan bool
+
+	//该链接处理的方法Router
+
+	Router siface.IRouter
+
 }
 
 //初始化链接模块的方法
 
-func NewConnection(conn *net.TCPConn,connID uint32,callbackApi siface.HandleFunc) *Connection  {
+func NewConnection(conn *net.TCPConn,connID uint32,router siface.IRouter) *Connection  {
 	c:=&Connection{
-
 		Conn:conn,
 		ConnID:connID,
-		handleAPI:callbackApi,
+		Router:router,
 		IsCLose:false,
 		ExitChan:make(chan bool,1),
 	}
@@ -47,18 +49,23 @@ func (c *Connection)StartReader()  {
 	for{
 		//读取客户端数据到buf 最大512byte
 		buf := make([]byte,512)
-		cnt,err := c.Conn.Read(buf)
+		_,err := c.Conn.Read(buf)
 		if err != nil{
 			fmt.Println("c.Conn.Read(buf) err = ",err)
 			continue
 		}
-
-		//调用当前链接所绑定的Handleapi
-
-		if err:=c.handleAPI(c.Conn,buf,cnt);err != nil{
-			fmt.Println("ConnID=",c.ConnID,"handle is error = ",err)
-			break
+		//得到当前Conn数据的request请求
+		req := &Request{
+			conn:c,
+			data:buf,
 		}
+		go func(request siface.IRequest) {
+			c.Router.PreHandle(request)
+			c.Router.Handle(request)
+			c.Router.PostHandle(request)
+		}(req)
+		//调用路由，从路由中找到Conn对应的Router调用
+
 	}
 }
 //启动链接 让当前的链接准备开始工作
