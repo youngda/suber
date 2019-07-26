@@ -26,8 +26,9 @@ type GloblaConfig struct {
 	Version string//Suber版本号
 	MaxConn int//允许的最大链接数
 	MaxPackageSize uint32 //数据包的最大值
+	WorkerPoolSize uint32 //当前业务工作池的Goroutine数量
+	MaxWorkerTaskLen uint32//框架允许的用户开辟的worker数量
 }
-
 /*
 	定义一个全局的对外GlobalConfig
 */
@@ -59,6 +60,8 @@ func init()  {
 		Host:"0.0.0.0",
 		MaxConn:1000,
 		MaxPackageSize:4096,
+		WorkerPoolSize:10,
+		MaxWorkerTaskLen:1024,
 	}
 
 	//尝试从配置文件中加载

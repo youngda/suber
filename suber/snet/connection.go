@@ -6,6 +6,7 @@ import (
 	"io"
 	"net"
 	"suber/siface"
+	"suber/utils"
 )
 
 /*
@@ -91,11 +92,16 @@ func (c *Connection) StartReader() {
 		//得到当前Conn数据的request请求
 		req := &Request{
 			conn: c,
-			msg:  msg,
+			msg:msg,
+		}
+		if utils.GlobalConfigNow.WorkerPoolSize>0{
+			//已经开启了工作池机制，将消息发送给Worker工作池处理
+			c.MsgHander.SendMsgToTaskQueue(req)
+		}else{
+			//调用路由，从路由中找到Conn对应的Router调用
+			go c.MsgHander.DoMsgHandler(req)
 		}
 
-		//调用路由，从路由中找到Conn对应的Router调用
-		go c.MsgHander.DoMsgHandler(req)
 	}
 }
 

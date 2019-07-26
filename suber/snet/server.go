@@ -42,8 +42,9 @@ func (s *Server) Start(){
 
 
 	go func() {
-
-		//1. 获取TCP ADD
+		//开启消息队列，及worker工作池
+		s.MsgHandler.StartWorkerPool()
+		// 1. 获取TCP ADD
 		addr,err := net.ResolveTCPAddr(s.IPVersion,fmt.Sprintf("%s:%d",s.IP,s.Port))
 		if err != nil{
 			fmt.Println("ResolveIPAddr err")
