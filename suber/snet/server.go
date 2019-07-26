@@ -16,8 +16,9 @@ type Server struct {
 	IP string
 	//服务器监听端口
 	Port int
-	//当前的server添加一个router,server的注册的链接对应的处理业务
-	Router siface.IRouter
+
+	//当前server的消息管理模块，用来绑定MsgID和对应的处理业务
+	MsgHandler siface.IMsgHandler
 }
 
 /*
@@ -65,7 +66,7 @@ func (s *Server) Start(){
 				continue
 			}
 			//将处理新连接的业务方法和conn进行绑定，得到我们的链接模块
-			dealConn:=NewConnection(conn,cid,s.Router)
+			dealConn:=NewConnection(conn,cid,s.MsgHandler)
 			cid++
 
 			//启动当前链接的业务处理
@@ -87,8 +88,8 @@ func (s *Server)Serve()  {
 
 	}
 }
-func (s *Server)AddRouter(router siface.IRouter)  {
-	s.Router = router
+func (s *Server)AddRouter(msgID uint32,router siface.IRouter)  {
+	s.MsgHandler.AddRouter(msgID,router)
 	fmt.Println("add router success...")
 }
 /*
@@ -101,7 +102,7 @@ func NewServer(name string) siface.IServer{
 		IPVersion:"tcp4",
 		IP:utils.GlobalConfigNow.Host,
 		Port:utils.GlobalConfigNow.TcpPort,
-		Router:nil,
+		MsgHandler:NewMsghander(),
 	}
 	return s
 }

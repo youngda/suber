@@ -24,19 +24,17 @@ type Connection struct {
 	//告知当前链接已经退出的/停止channel
 	ExitChan chan bool
 
-	//该链接处理的方法Router
-
-	Router siface.IRouter
-
+	//消息的管理MsgID，和对应的处理业务API关系
+	MsgHander siface.IMsgHandler
 }
 
 //初始化链接模块的方法
 
-func NewConnection(conn *net.TCPConn,connID uint32,router siface.IRouter) *Connection  {
+func NewConnection(conn *net.TCPConn,connID uint32,msgHandler siface.IMsgHandler) *Connection  {
 	c:=&Connection{
 		Conn:conn,
 		ConnID:connID,
-		Router:router,
+		MsgHander:msgHandler,
 		IsCLose:false,
 		ExitChan:make(chan bool,1),
 	}
@@ -94,13 +92,9 @@ func (c *Connection)StartReader()  {
 			conn:c,
 			msg:msg,
 		}
-		go func(request siface.IRequest) {
-			c.Router.PreHandle(request)
-			c.Router.Handle(request)
-			c.Router.PostHandle(request)
-		}(req)
-		//调用路由，从路由中找到Conn对应的Router调用
 
+		//调用路由，从路由中找到Conn对应的Router调用
+		go c.MsgHander.DoMsgHandler(req)
 	}
 }
 
