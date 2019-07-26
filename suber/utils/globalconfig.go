@@ -54,7 +54,7 @@ func init()  {
 	//如果配置文件没有加载，默认的值
 	GlobalConfigNow = &GloblaConfig{
 		Name:"SuberAPP",
-		Version:"v0.4",
+		Version:"v0.7",
 		TcpPort:8999,
 		Host:"0.0.0.0",
 		MaxConn:1000,

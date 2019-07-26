@@ -24,11 +24,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.6/Server.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="812">
+              <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/snet/connection.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1293">
+              <caret line="48" column="62" selection-start-line="48" selection-start-column="62" selection-end-line="48" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/conf/suber.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/Client.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="616">
+              <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/Server.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/globalconfig.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="56" column="8" lean-forward="true" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/Client1.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -100,24 +154,28 @@
         <option value="$PROJECT_DIR$/../myDome/SuberV0.5/conf/suber.json" />
         <option value="$PROJECT_DIR$/../myDome/SuberV0.5/Server.go" />
         <option value="$PROJECT_DIR$/../myDome/SuberV0.5/Client.go" />
-        <option value="$PROJECT_DIR$/utils/globalconfig.go" />
         <option value="$PROJECT_DIR$/siface/imsghandler.go" />
         <option value="$PROJECT_DIR$/snet/msghandler.go" />
         <option value="$PROJECT_DIR$/siface/iserver.go" />
         <option value="$PROJECT_DIR$/snet/server.go" />
-        <option value="$PROJECT_DIR$/snet/connection.go" />
         <option value="$PROJECT_DIR$/../myDome/SuberV0.6/conf/suber.json" />
         <option value="$PROJECT_DIR$/../myDome/SuberV0.6/Client.go" />
         <option value="$PROJECT_DIR$/../myDome/SuberV0.6/Client1.go" />
         <option value="$PROJECT_DIR$/../myDome/SuberV0.6/Server.go" />
+        <option value="$PROJECT_DIR$/snet/connection.go" />
+        <option value="$PROJECT_DIR$/../myDome/SuberV0.7/Server.go" />
+        <option value="$PROJECT_DIR$/../myDome/SuberV0.7/Client1.go" />
+        <option value="$PROJECT_DIR$/../myDome/SuberV0.7/Client.go" />
+        <option value="$PROJECT_DIR$/utils/globalconfig.go" />
+        <option value="$PROJECT_DIR$/../myDome/SuberV0.7/conf/suber.json" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="357" />
-    <option name="y" value="140" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="892" />
+    <option name="y" value="187" />
     <option name="width" value="1500" />
-    <option name="height" value="839" />
+    <option name="height" value="868" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -135,7 +193,31 @@
             <path>
               <item name="suber" type="b2602c69:ProjectViewProjectNode" />
               <item name="suber" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="suber" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="suber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="suber" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="suber" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="suber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="suber" type="47feb1d3:ProjectViewModuleNode" />
               <item name="myDome" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="suber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="suber" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="myDome" type="462c0819:PsiDirectoryNode" />
+              <item name="SuberV0.7" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="suber" type="b2602c69:ProjectViewProjectNode" />
+              <item name="suber" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="myDome" type="462c0819:PsiDirectoryNode" />
+              <item name="SuberV0.7" type="462c0819:PsiDirectoryNode" />
+              <item name="conf" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -156,8 +238,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\go\src\myDome\SuberV0.6" />
       <recent name="G:\go\src\myDome" />
+      <recent name="G:\go\src\myDome\SuberV0.6" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -395,13 +477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/globalconfig.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1456">
-          <caret line="56" column="21" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/siface/iserver.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -413,13 +488,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="18" selection-start-line="18" selection-end-line="19" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/snet/connection.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="96" column="40" selection-start-line="96" selection-start-column="40" selection-end-line="96" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -446,8 +514,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.6/Server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="812">
+          <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/snet/connection.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1293">
+          <caret line="48" column="62" selection-start-line="48" selection-start-column="62" selection-end-line="48" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/Client1.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/Client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/Server.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/globalconfig.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="56" column="8" lean-forward="true" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../myDome/SuberV0.7/conf/suber.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
         </state>
       </provider>
     </entry>
