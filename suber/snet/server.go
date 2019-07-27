@@ -19,6 +19,9 @@ type Server struct {
 
 	//当前server的消息管理模块，用来绑定MsgID和对应的处理业务
 	MsgHandler siface.IMsgHandler
+
+	//该server的链接管理器
+	ConnMgr siface.IConnManager
 }
 
 /*
@@ -66,19 +69,35 @@ func (s *Server) Start(){
 				fmt.Println("listener.AcceptTCP() err=",err)
 				continue
 			}
+
+			// 设置当前连接个数的判断，如果超过最大链接，则关闭此链接
+			if s.ConnMgr.Len() >= utils.GlobalConfigNow.MaxConn{
+				//TODO 给客户端相应一个超出最大连接的错误包
+				fmt.Println("too many connetion....MaxConn = ",utils.GlobalConfigNow.MaxConn)
+				conn.Close()
+				continue
+			}
+
 			//将处理新连接的业务方法和conn进行绑定，得到我们的链接模块
-			dealConn:=NewConnection(conn,cid,s.MsgHandler)
+			dealConn:=NewConnection(s,conn,cid,s.MsgHandler)
 			cid++
 
 			//启动当前链接的业务处理
-			dealConn.Start()
+			go dealConn.Start()
 		}
 	}()
 
 }
+//获取当前的server的链接管理器
+func (s *Server)GetConnMgr() siface.IConnManager{
+	return s.ConnMgr
+}
+
 //停止服务器
 func (s *Server)Stop(){
 	//TODO 将一些服务器资源、状态、或者开辟的链接信息进行停止或者回收
+	fmt.Println("[server stop] suber server stop")
+	s.ConnMgr.ClearConn()
 }
 //运行服务器
 func (s *Server)Serve()  {
@@ -104,6 +123,7 @@ func NewServer(name string) siface.IServer{
 		IP:utils.GlobalConfigNow.Host,
 		Port:utils.GlobalConfigNow.TcpPort,
 		MsgHandler:NewMsghander(),
+		ConnMgr:NewConnManager(),
 	}
 	return s
 }

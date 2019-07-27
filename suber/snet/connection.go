@@ -13,6 +13,8 @@ import (
 	链接模块
 */
 type Connection struct {
+	// 当前conn属于哪个server
+	Tcpserver siface.IServer
 	//当前链接的socket TCP套接字
 	Conn *net.TCPConn
 
@@ -33,15 +35,19 @@ type Connection struct {
 
 //初始化链接模块的方法
 
-func NewConnection(conn *net.TCPConn, connID uint32, msgHandler siface.IMsgHandler) *Connection {
+func NewConnection(server siface.IServer,conn *net.TCPConn, connID uint32, msgHandler siface.IMsgHandler) *Connection {
 	c := &Connection{
+		Tcpserver:server,
 		Conn:      conn,
 		ConnID:    connID,
 		MsgHander: msgHandler,
 		IsCLose:   false,
 		msgChan:   make(chan []byte),
 		ExitChan:  make(chan bool, 1),
+
 	}
+	c.Tcpserver.GetConnMgr().Add(c)
+	//将conn加入到connManager中
 	return c
 }
 
@@ -145,6 +151,9 @@ func (c *Connection) Stop() {
 		return
 	}
 	c.IsCLose = true
+
+	//将当前链接从connMgr删除
+	c.Tcpserver.GetConnMgr().Remove(c)
 	//	回收资源
 	c.Conn.Close()
 	close(c.ExitChan)
