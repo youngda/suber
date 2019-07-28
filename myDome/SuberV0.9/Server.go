@@ -43,9 +43,27 @@ func (this *HelloHandler)Handle(request siface.IRequest)  {
 }
 
 
+//创建链接之后执行的钩子函数
+func DoConnBegin(conn siface.IConnection)  {
+	fmt.Println("--->DoConnBegin is Called ....")
+	if err := conn.SendMsg(202,[]byte("DoConnBegin is started"));err != nil{
+		fmt.Println("DoConnBegin conn.SendMsg ")
+	}
+}
+//创建链接之后执行的钩子函数
+func DoConnLost(conn siface.IConnection){
+	fmt.Println("--->DoConnLost is Called ....")
+	fmt.Println("Conn ID  = ",conn.GetConnID(),"is lost..")
+}
+
+
 func main()  {
 	//创建一个server句柄
 	s:= snet.NewServer("[suber v0.9]")
+
+	//注册链接Hook钩子方法
+	s.SetOnConnStart(DoConnBegin)
+	s.SetOnConnStop(DoConnLost)
 
 	//给当前suber框架添加自定义router
 	s.AddRouter(0,&PingRouter{})

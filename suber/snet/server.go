@@ -22,6 +22,12 @@ type Server struct {
 
 	//该server的链接管理器
 	ConnMgr siface.IConnManager
+
+	//该Server创建链接之后自动调用的Hook函数
+	OnConnStart func(conn siface.IConnection)
+	//该Server销毁链接之前自动调用的Hook函数
+	OnConnStop func(conn siface.IConnection)
+
 }
 
 /*
@@ -126,4 +132,27 @@ func NewServer(name string) siface.IServer{
 		ConnMgr:NewConnManager(),
 	}
 	return s
+}
+
+//注册OnConnStart钩子函数的方法
+func (s *Server) SetOnConnStart(hookFunk func(connection siface.IConnection)){
+	s.OnConnStart =hookFunk
+}
+//注册OnConnStop 钩子函数的方法
+func (s *Server) SetOnConnStop(hookFunk func(connection siface.IConnection)){
+	s.OnConnStop = hookFunk
+}
+//调用OnStop 钩子函数的方法
+func (s *Server) CallOnConnStart(conn siface.IConnection){
+	if s.OnConnStart != nil{
+		fmt.Println("----> Call OnConnStart()...")
+		s.OnConnStart(conn)
+	}
+}
+//调用OnStop 钩子函数的方法
+func (s *Server) CallOnConnStop(conn siface.IConnection){
+	if s.OnConnStop != nil{
+		fmt.Println("---> Call OnConnStop()...")
+		s.OnConnStop(conn)
+	}
 }

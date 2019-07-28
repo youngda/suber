@@ -142,6 +142,8 @@ func (c *Connection) Start() {
 	//从当前链接的写数据业务
 	go c.StartWriter()
 
+	//按照开发者传递来的 创建链接之后需要调用的处理业务，执行对应的hook
+	c.Tcpserver.CallOnConnStart(c)
 }
 
 //停止链接 结束当前链接的工作
@@ -154,6 +156,13 @@ func (c *Connection) Stop() {
 
 	//将当前链接从connMgr删除
 	c.Tcpserver.GetConnMgr().Remove(c)
+
+
+
+	//调用开发者传递来的 销毁链接之前需要调用的处理业务，执行对应的hook
+	c.Tcpserver.CallOnConnStop(c)
+
+
 	//	回收资源
 	c.Conn.Close()
 	close(c.ExitChan)
