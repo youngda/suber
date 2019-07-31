@@ -7,6 +7,7 @@ import (
 	"net"
 	"suber/siface"
 	"suber/utils"
+	"sync"
 )
 
 /*
@@ -31,6 +32,11 @@ type Connection struct {
 	msgChan chan []byte
 	//消息的管理MsgID，和对应的处理业务API关系
 	MsgHander siface.IMsgHandler
+
+	//链接属性集合
+	property map[string]interface{}
+	//保护链接属性修改的锁
+	propertyLock sync.RWMutex
 }
 
 //初始化链接模块的方法
@@ -44,7 +50,7 @@ func NewConnection(server siface.IServer,conn *net.TCPConn, connID uint32, msgHa
 		IsCLose:   false,
 		msgChan:   make(chan []byte),
 		ExitChan:  make(chan bool, 1),
-
+		property: make(map[string]interface{}),
 	}
 	c.Tcpserver.GetConnMgr().Add(c)
 	//将conn加入到connManager中
@@ -205,3 +211,36 @@ func (c *Connection) SendMsg(msgId uint32, data []byte) error {
 
 	return nil
 }
+
+
+
+//设置链接属性
+func (c *Connection) SetProperty(key string,value interface{}){
+	c.propertyLock.Lock()
+	defer c.propertyLock.Unlock()
+
+	//添加一个链接属性
+
+	c.property[key] = value
+}
+//获取链接属性
+func (c *Connection) GetProperty(key string)(interface{},error){
+	c.propertyLock.RLock()
+	defer c.propertyLock.RUnlock()
+
+	//读取属性
+	if value,ok:=c.property[key];ok{
+		return value,nil
+	}else {
+		return nil,errors.New("no property found")
+	}
+}
+//移除链接属性
+func (c *Connection) RemoveProperty(key string){
+	c.propertyLock.Lock()
+	defer c.propertyLock.Unlock()
+	//删除属性
+	delete(c.property,key)
+
+}
+

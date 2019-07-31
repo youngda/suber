@@ -1,6 +1,8 @@
 package siface
 
-import "net"
+import (
+	"net"
+)
 
 //定义链接模块抽象层
 
@@ -17,6 +19,13 @@ type IConnection interface {
 	RemoteAddr() net.Addr
 	//发送数据 将数据发送到运程客户
 	SendMsg(msgId uint32,data []byte) error
+
+	//设置链接属性
+	SetProperty(key string,value interface{})
+	//获取链接属性
+	GetProperty(key string)(interface{},error)
+	//移除链接属性
+	RemoveProperty(key string)
 }
 
 type HandleFunc func(*net.TCPConn,[]byte,int) error
